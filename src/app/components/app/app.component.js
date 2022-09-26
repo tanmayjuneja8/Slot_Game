@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-use-before-define */
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
 import { HAS_TOUCH } from '../../constants/browser.constants';
 import { SlotMachine } from '../slot-machine/slot-machine.component';
@@ -62,7 +64,7 @@ export class App {
 
     // State:
     // TODO: Create constants in a config file for all these numbers...
-    coins = parseInt(localStorage.coins, 10) || 100;
+    coins = 5; // parseInt(localStorage.coins, 10) || 100;
     jackpot = parseInt(localStorage.jackpot, 10) || 1000;
     spins = parseInt(localStorage.spins, 10) || 0;
     lastSpin = localStorage.lastSpin || 0;
@@ -72,7 +74,6 @@ export class App {
 
     constructor() {
         const now = Date.now();
-
         // Update jackpot randomly:
         if (now - this.lastSpin >= App.ONE_DAY) {
             localStorage.jackpot = this.jackpot = Math.max(500, this.jackpot - 500 + (Math.random() * 1000)) | 0;
@@ -166,7 +167,10 @@ export class App {
     }
 
     handleUseCoin() {
-        localStorage.coins = this.coins = Math.max(this.coins - 1, 0) || 100;
+        localStorage.coins = this.coins = Math.max(this.coins - 1, 0) || 5;
+        // if (localStorage.coins === 0) {
+        //     console.log('Please stop!');
+        // }
         localStorage.jackpot = ++this.jackpot;
         localStorage.spins = ++this.spins;
         localStorage.lastSpin = this.lastSpin = Date.now();
@@ -175,16 +179,15 @@ export class App {
     }
 
     handleGetPrice(jackpotPercentage) {
-        const price = Math.min(Math.max(Math.ceil(jackpotPercentage * this.jackpot), 10), this.jackpot);
-
-        localStorage.jackpot = this.jackpot = Math.max(this.jackpot - price, 0) || 1000;
+        const price = jackpotPercentage;
+        localStorage.jackpot = this.jackpot = 1000;
+        // console.log(localStorage.jackpot);
         localStorage.coins = this.coins += price;
-
         this.refreshGameInfo();
     }
 
     refreshGameInfo() {
-        const maxValue = Math.max(this.coins, this.jackpot, this.spins);
+        const maxValue = Math.max(this.coins, this.spins);
         const padding = Math.max(Math.ceil(maxValue.toString().length / 2) * 2, 5);
 
         this.coinsElement.innerText = `${ this.coins }`.padStart(padding, '0');

@@ -1,3 +1,6 @@
+/* eslint-disable no-const-assign */
+/* eslint-disable no-console */
+/* eslint-disable no-use-before-define */
 import { SYMBOLS_CLASSIC } from '../../constants/symbols.constants';
 import { resetAnimations } from '../../utils/animation.util';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
@@ -70,7 +73,7 @@ export class SlotMachine {
         reelCount = 3,
         symbols = SYMBOLS_CLASSIC,
         isPaused = false,
-        speed = -0.552, // TODO: Make enum and match sounds too.
+        speed = 0.142, // TODO: Make enum and match sounds too.
     ) {
         this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
 
@@ -245,8 +248,8 @@ export class SlotMachine {
 
         let maxOccurrences = 0;
         let lastSymbol = '';
-        let maxSymbol = '';
-        let maxPrize = 0;
+        // let maxSymbol = '';
+        const maxPrize = 1200;
 
         for (let i = 0; i < reelCount; ++i) {
             const symbol = currentCombination[i];
@@ -256,18 +259,23 @@ export class SlotMachine {
 
             if (occurrences > maxOccurrences) {
                 maxOccurrences = occurrences;
-
-                const index = symbols.indexOf(symbol);
-                const maxIndex = symbols.indexOf(maxSymbol); // TODO: Calculate every time?
-
-                if (index > maxIndex) {
-                    maxSymbol = symbol;
-                    maxPrize = index + 1;
-                }
             }
+
+            //     const index = symbols.indexOf(symbol);
+            //     const maxIndex = symbols.indexOf(maxSymbol); // TODO: Calculate every time?
+
+            //     if (index > maxIndex) {
+            //         maxSymbol = symbol;
+            //         maxPrize = index + 1;
+            //     }
+            // }
         }
 
         // TODO: Use a constant for this `2`:
+        console.log(maxOccurrences);
+        console.log(maxPrize);
+        console.log(reelCount);
+        console.log(maxOccurrences * (maxPrize / symbols.length) / reelCount);
         return maxOccurrences > 2 ? maxOccurrences * (maxPrize / symbols.length) / reelCount : null;
     }
 

@@ -2,18 +2,18 @@
     "name": "slotjs",
     "version": "1.0.0",
     "description": "🎰 Circular slot machine mobile-first SPA built with JavaScript, CSS variables and Emojis!",
-    "homepage": "https://github.com/Danziger/slotjs#readme",
+    "homepage": "https://github.com/tanmayjuneja8",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Danziger/slotjs.git"
+        "url": "git+https://github.com/tanmayjuneja8/UltraPawz_Slot_Game.git"
     },
     "bugs": {
-        "url": "https://github.com/Danziger/slotjs/issues"
+        "url": "https://github.com/tanmayjuneja8/UltraPawz_Slot_Game.git"
     },
     "author": {
-        "name": "Daniel Gámez Franco",
-        "email": "gmzcodes@outlook.com",
-        "url": "http://gmzcodes.com"
+        "name": "Tanmay Juneja",
+        "email": "tanmayjuneja8@gmail.com",
+        "url": "github.com/tanmayjuneja8"
     },
     "license": "MIT",
     "main": "index.js",
@@ -35,7 +35,10 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "core-js": "^3.23.5"
+        "core-js": "^3.23.5",
+        "firebaseauth": "^1.0.0",
+        "http-server": "^14.1.1",
+        "php": "^1.0.2"
     },
     "devDependencies": {
         "@babel/core": "^7.18.9",
@@ -71,7 +74,7 @@
         "stylelint-order": "^5.0.0",
         "stylelint-scss": "^4.3.0",
         "stylelint-webpack-plugin": "^3.3.0",
-        "webpack": "^5.73.0",
+        "webpack": "^5.74.0",
         "webpack-bundle-analyzer": "^4.5.0",
         "webpack-cli": "^4.10.0",
         "webpack-dev-server": "^4.9.3"

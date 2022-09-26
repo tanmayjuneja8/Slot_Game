@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const path = require('path');
 
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -47,7 +48,7 @@ module.exports = (env, argv) => {
                 directory: path.resolve(__dirname, 'static'),
             },
             devMiddleware: {
-                publicPath: '/slotjs/',
+                publicPath: '/',
                 // When sharing the site using ssh -R 80:localhost:8080 ssh.localhost.run
                 // disableHostCheck: true,
             },
@@ -89,7 +90,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
                 template: path.resolve(__dirname, 'src/app/components/app/app.template.ejs'),
-                title: 'SlotJS \\ Circular slot machine mobile-first SPA built using JavaScript, CSS variables and Emojis!',
+                title: 'UltraPawz',
                 description: pkg.description,
                 favicon: path.resolve(__dirname, 'static/favicon.ico'),
                 inlineSource: '.(js|css)$', // Inline JS and CSS.
