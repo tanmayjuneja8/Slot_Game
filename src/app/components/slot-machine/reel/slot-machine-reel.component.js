@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { stopAtAnimation } from '../../../utils/animation.util';
 import { createElement } from '../../../utils/dom.util';
 import { shuffle } from '../../../utils/array.util';

@@ -1,7 +1,7 @@
 {
     "name": "slotjs",
     "version": "1.0.0",
-    "description": "🎰 Circular slot machine mobile-first SPA built with JavaScript, CSS variables and Emojis!",
+    "description": "UltraPawz slot machine mobile-first SPA built with JavaScript, CSS variables and Emojis!",
     "homepage": "https://github.com/tanmayjuneja8",
     "repository": {
         "type": "git",
@@ -36,6 +36,7 @@
     },
     "dependencies": {
         "core-js": "^3.23.5",
+        "firebase": "^9.10.0",
         "firebaseauth": "^1.0.0",
         "http-server": "^14.1.1",
         "php": "^1.0.2"

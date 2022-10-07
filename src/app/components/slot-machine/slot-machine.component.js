@@ -70,10 +70,10 @@ export class SlotMachine {
         wrapper,
         handleUseCoin,
         handleGetPrice,
-        reelCount = 3,
+        reelCount,
         symbols = SYMBOLS_CLASSIC,
         isPaused = false,
-        speed = 0.142, // TODO: Make enum and match sounds too.
+        speed = 0.169, // TODO: Make enum and match sounds too.
     ) {
         this.init(wrapper, handleUseCoin, handleGetPrice, reelCount, symbols, speed);
 
@@ -100,7 +100,7 @@ export class SlotMachine {
         this.wrapper = wrapper;
         this.handleUseCoin = handleUseCoin;
         this.handleGetPrice = handleGetPrice;
-        this.reelCount = reelCount;
+        this.reelCount = 3;
         this.symbols = symbols;
         this.speed = speed;
         this.blipFading = 1 / reelCount;
@@ -117,8 +117,8 @@ export class SlotMachine {
         }
 
         const { reelsContainer, reels } = this;
-
-        for (let reelIndex = 0; reelIndex < reelCount; ++reelIndex) {
+        console.log(reelCount);
+        for (let reelIndex = 0; reelIndex < 3; ++reelIndex) {
             const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols, diameter);
 
             reelsContainer.appendChild(reel.root);
@@ -272,10 +272,10 @@ export class SlotMachine {
         }
 
         // TODO: Use a constant for this `2`:
-        console.log(maxOccurrences);
-        console.log(maxPrize);
-        console.log(reelCount);
-        console.log(maxOccurrences * (maxPrize / symbols.length) / reelCount);
+        // console.log(maxOccurrences);
+        // console.log(maxPrize);
+        // console.log(reelCount);
+        // console.log(maxOccurrences * (maxPrize / symbols.length) / reelCount);
         return maxOccurrences > 2 ? maxOccurrences * (maxPrize / symbols.length) / reelCount : null;
     }
 

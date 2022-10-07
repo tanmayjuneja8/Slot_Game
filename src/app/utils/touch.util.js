@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { IS_IOS } from '../constants/browser.constants';
 
 let tap = false;

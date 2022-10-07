@@ -1,3 +1,7 @@
+/* eslint-disable import/order */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-mixed-operators */
 /* eslint-disable no-console */
 /* eslint-disable no-use-before-define */
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
@@ -8,6 +12,7 @@ import { Modal } from '../modal/modal.component';
 import { PayTable } from '../pay-table/pay-table.component';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
 import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
+
 
 import './app.style.scss';
 import '../header/header.styles.scss';
@@ -50,7 +55,6 @@ export class App {
 
     // Misc.:
     static ONE_DAY = 1000 * 60 * 60 * 24;
-
     // Elements:
     coinsElement = document.querySelector(App.S_COINS);
     jackpotElement = document.querySelector(App.S_JACKPOT);
@@ -104,73 +108,10 @@ export class App {
 
         // Init/render conditional parts of the UI such as vibration and first-time only features:
         this.initUI();
-
-        /*
-        // TODO: Move this to CheatMode component.
-
-        const originalSpeed = slotMachine.speed;
-
-        let confirmation;
-        let yes;
-        let no;
-
-        const wait = () => {
-            // eslint-disable-next-line no-console
-            console.log('Ok... 👌');
-
-            setTimeout(() => {
-                // eslint-disable-next-line no-console
-                console.log(confirmation);
-            }, 5000 + Math.random() * 5000);
-        };
-
-        const cheat = () => {
-            slotMachine.speed = originalSpeed / 100;
-            confirmation = 'Ok, really... Last chance. Do yo want to go back to normal mode? 😠';
-            yes = normal; // eslint-disable-line no-use-before-define
-            no = wait;
-
-            // eslint-disable-next-line no-console
-            console.log('Ok, but remember time will go on as normal for you... ⏳');
-            // eslint-disable-next-line max-len, no-console
-            console.log('Do you want to go back before it\'s too late?
-            You don\'t want to happen to you what happened to Captain America 🛡️, do you?');
-        };
-
-        const normal = () => {
-            slotMachine.speed = originalSpeed;
-            confirmation = 'I\'m sure you are gonna like it...? Wanna play in God mode? 😏 💰';
-            yes = cheat;
-            no = wait;
-
-            // eslint-disable-next-line no-console
-            console.log('Playing in normal mode.');
-            // eslint-disable-next-line no-console
-            console.log('Wanna switch to God mode? 😏');
-        };
-
-        normal();
-
-        const yesGetter = () => { yes(); };
-        const noGetter = () => { no(); };
-
-        Object.defineProperties(window, {
-            yes: { get: yesGetter },
-            no: { get: noGetter },
-            Yes: { get: yesGetter },
-            No: { get: noGetter },
-        });
-
-        */
-
-
     }
 
     handleUseCoin() {
         localStorage.coins = this.coins = Math.max(this.coins - 1, 0) || 5;
-        // if (localStorage.coins === 0) {
-        //     console.log('Please stop!');
-        // }
         localStorage.jackpot = ++this.jackpot;
         localStorage.spins = ++this.spins;
         localStorage.lastSpin = this.lastSpin = Date.now();
@@ -189,7 +130,9 @@ export class App {
     refreshGameInfo() {
         const maxValue = Math.max(this.coins, this.spins);
         const padding = Math.max(Math.ceil(maxValue.toString().length / 2) * 2, 5);
-
+        // if (localStorage.coins >= 100) {
+        //     console.log('Wowza paaji!');
+        // }
         this.coinsElement.innerText = `${ this.coins }`.padStart(padding, '0');
         this.jackpotElement.innerText = `${ this.jackpot }`.padStart(padding, '0');
         this.spinsElement.innerText = `${ this.spins }`.padStart(padding, '0');
