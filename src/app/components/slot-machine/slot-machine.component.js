@@ -117,7 +117,6 @@ export class SlotMachine {
         }
 
         const { reelsContainer, reels } = this;
-        console.log(reelCount);
         for (let reelIndex = 0; reelIndex < 3; ++reelIndex) {
             const reel = new SlotMachineReel(reelIndex, alpha, shuffledSymbols, diameter);
 
@@ -248,7 +247,6 @@ export class SlotMachine {
 
         let maxOccurrences = 0;
         let lastSymbol = '';
-        // let maxSymbol = '';
         const maxPrize = 1200;
 
         for (let i = 0; i < reelCount; ++i) {
@@ -276,7 +274,7 @@ export class SlotMachine {
         // console.log(maxPrize);
         // console.log(reelCount);
         // console.log(maxOccurrences * (maxPrize / symbols.length) / reelCount);
-        return maxOccurrences > 2 ? maxOccurrences * (maxPrize / symbols.length) / reelCount : null;
+        return maxOccurrences >= 2 ? maxOccurrences * (maxPrize / symbols.length) / reelCount : null;
     }
 
     handleResize() {

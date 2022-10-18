@@ -96,10 +96,10 @@
         flex: 0 1 auto;
         display: flex;
         box-sizing: border-box;
-        padding: 28px 8px 8px;
+        padding: 30px 10px 10px;
         overflow: hidden;
-        max-width: 192px;
-        border-left: 1px solid #f0f0f0;
+        max-width: 200px;
+        border-left: 0 solid #f0f0f0;
         background: #fff;
     }
 
@@ -131,10 +131,6 @@
     }
 
     &__value {
-        flex: 1 0 auto;
         background: #f0f0f0;
-        border-radius: 2px;
-        padding: 8px;
-        font-size: 12px;
     }
 }
