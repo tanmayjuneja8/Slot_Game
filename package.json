@@ -36,7 +36,6 @@
     },
     "dependencies": {
         "core-js": "^3.23.5",
-        "firebase": "^9.10.0",
         "firebaseauth": "^1.0.0",
         "http-server": "^14.1.1",
         "php": "^1.0.2"
