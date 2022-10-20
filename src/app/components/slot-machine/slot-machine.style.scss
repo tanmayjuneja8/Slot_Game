@@ -99,9 +99,9 @@
         }
 
         &.is-fail {
-            --displayShadowColor: rgba(255, 0, 0, 0.25);
+            --displayShadowColor: rgba(255, 255, 0, 0.25);
 
-            background: rgb(255, 0, 0);
+            background: rgb(253, 179, 56);
         }
     }
 }

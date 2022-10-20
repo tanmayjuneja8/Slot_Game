@@ -161,6 +161,7 @@ export class SlotMachine {
             SMSoundService.unlucky();
 
             this.display.classList.add(SlotMachine.C_IS_FAIL);
+            this.handleGetPrice(51);
         }
     }
 

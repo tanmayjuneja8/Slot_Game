@@ -1,3 +1,7 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-tabs */
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow-callback */
 /* eslint-disable prefer-template */
 /* eslint-disable camelcase */
 /* eslint-disable no-undef */
@@ -17,7 +21,6 @@ import { SMVibrationService } from '../../services/slot-machine/vibration/slot-m
 import './app.style.scss';
 import '../header/header.styles.scss';
 import '../footer/footer.styles.scss';
-// import '../pay-table/pay-table.styles.scss';
 
 const SERVICES = {
     sound: SMSoundService,
@@ -56,8 +59,8 @@ export class App {
     // Components:
     slotMachine;
 
-    coins = 5; ct = 1;
-    coin_percentage = 1.66;
+    coins = 5; ct = 1; percent = 80; time = null;
+    coin_percentage = 0;
     lastSpin = localStorage.lastSpin || 0;
     isSoundDisabled = localStorage.sound === 'false';
     isVibrationDisabled = localStorage.vibration === 'false';
@@ -100,7 +103,7 @@ export class App {
         }
         localStorage.coins = this.coins = Math.max(this.coins - 1, 0) || 5;
         localStorage.coin_percentage = this.coin_percentage = Math.round(Math.min(this.coins / 3, 100));
-        this.handlebar();
+        // this.handlebar();
         // localStorage.spins = ++this.spins;
         localStorage.lastSpin = this.lastSpin = Date.now();
 
@@ -114,8 +117,10 @@ export class App {
         }
         const price = jackpotPercentage;
         localStorage.coins = this.coins += price;
-        localStorage.coin_percentage = Math.round(Math.min(this.coins / 3, 100));
-        this.handlebar();
+        // console.log(this.coins);
+        localStorage.coin_percentage = this.coin_percentage = Math.round(Math.min(this.coins / 3, 100));
+        // console.log(this.coin_percentage);
+        // this.handlebar();
         this.refreshGameInfo();
     }
 
@@ -126,6 +131,8 @@ export class App {
         }
         const padding = 5;
         this.jackpotElement.innerText = `${ this.coin_percentage }`.padStart(padding, '0');
+
+        clearTimeout(this.timeout);
         this.handlebar();
     }
 
@@ -172,25 +179,30 @@ export class App {
     }
 
     handleNoti() {
+        const now = Date.now();
         const button = document.getElementsByClassName('btn btn-lg btn-warning')[0];
         const card = document.getElementById('p1');
         console.log(this.ct);
-        let percent = Math.random() * (5) + 82;
-        if (this.ct < 100) {
-            percent = Math.random() * (5) + 95;
-        }
-        if (this.ct > 100 && this.ct < 500) {
-            percent = Math.random() * (5) + 90;
-        }
-        if (this.ct > 500) {
-            percent = Math.random() * (5) + 87;
+        if (now - this.time >= 3000) {
+            console.log('ghusgaya');
+            this.percent = Math.random() * (5) + 83;
+            if (this.ct < 50) {
+                this.percent = Math.random() * (5.3) + 91.5;
+            }
+            if (this.ct > 50 && this.ct < 150) {
+                this.percent = Math.random() * 5 + 88;
+            }
         }
         if (this.ct <= 49) {
-            card.innerHTML = 'Wow! You did better than ' + percent.toFixed(2) + '% people in the last game. Your rewards until now are ' + this.ct * 20 + ' TIS coins. You can claim your reward coins by joining the waitlist below!';
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + this.ct * 20 + ' TIS coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         } else {
-            card.innerHTML = 'Wow! You did better than ' + percent.toFixed(2) + '% people in the last game. Your rewards until now are ' + 999 + ' TIS coins. You can claim your reward coins by joining the waitlist below!';
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + 1000 + ' TIS coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         }
-        button.click();
+        this.time = Date.now();
+        console.log(this.ct * 20);
+        setTimeout(function () {
+            button.click();
+        }, 950);
     }
 
     handlebar() {
@@ -201,7 +213,7 @@ export class App {
         }
         const progressBar = document.getElementsByClassName('progress-bar bg-success')[0];
         progressBar.style.width = `${ Math.round(this.coin_percentage) }%`;
-        if (this.coin_percentage >= 95) {
+        if (this.coin_percentage >= 15) {
             this.handleNoti();
         }
     }
