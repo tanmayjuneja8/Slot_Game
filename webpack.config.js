@@ -90,7 +90,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: path.resolve(__dirname, 'dist/index.html'),
                 template: path.resolve(__dirname, 'src/app/components/app/app.template.ejs'),
-                title: 'TIS',
+                title: 'Blozum',
                 description: pkg.description,
                 favicon: path.resolve(__dirname, 'static/favicon.ico'),
                 inlineSource: '.(js|css)$', // Inline JS and CSS.

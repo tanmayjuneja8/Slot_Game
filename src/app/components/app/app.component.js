@@ -194,9 +194,9 @@ export class App {
             }
         }
         if (this.ct <= 49) {
-            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + this.ct * 20 + ' TIS coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + this.ct * 20 + ' BZM coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         } else {
-            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + 1000 + ' TIS coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + 1000 + ' BZM coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         }
         this.time = Date.now();
         console.log(this.ct * 20);
