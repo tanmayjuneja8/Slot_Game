@@ -1,7 +1,7 @@
 {
     "name": "slotjs",
     "version": "1.0.0",
-    "description": "Blozom User Acquisition slot machine mobile-first SPA built with JavaScript, CSS variables and Emojis!",
+    "description": "Blozom slot machine mobile-first game!",
     "homepage": "https://github.com/tanmayjuneja8",
     "repository": {
         "type": "git",
