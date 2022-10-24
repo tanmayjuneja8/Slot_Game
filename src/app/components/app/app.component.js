@@ -183,8 +183,7 @@ export class App {
         const button = document.getElementsByClassName('btn btn-lg btn-warning')[0];
         const card = document.getElementById('p1');
         console.log(this.ct);
-        if (now - this.time >= 3000) {
-            console.log('ghusgaya');
+        if (now - this.time >= 5000) {
             this.percent = Math.random() * (5) + 83;
             if (this.ct < 50) {
                 this.percent = Math.random() * (5.3) + 91.5;
