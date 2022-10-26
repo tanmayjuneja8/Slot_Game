@@ -104,14 +104,14 @@ export class App {
             document.body.classList.remove(App.C_FOCUS_ACTIVE);
         });
         const firebaseConfig = {
-            apiKey: process.env.API_KEY || 'AIzaSyDfeNYGpnsrDHyAks9q-72HRY5OXP8tQPg',
+            apiKey: 'AIzaSyDfeNYGpnsrDHyAks9q-72HRY5OXP8tQPg',
             authDomain: 'game-referral.firebaseapp.com',
             databaseURL: 'https://game-referral-default-rtdb.firebaseio.com',
             projectId: 'game-referral',
             storageBucket: 'game-referral.appspot.com',
-            messagingSenderId: process.env.SENDER_ID.toString(),
-            appId: process.env.APP_ID.toString(),
-            measurementId: process.env.MEASUREMENT_ID.toString(),
+            messagingSenderId: process.env.SENDER_ID,
+            appId: process.env.APP_ID,
+            measurementId: process.env.MEASUREMENT_ID,
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
