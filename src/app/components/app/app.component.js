@@ -109,9 +109,9 @@ export class App {
             databaseURL: 'https://game-referral-default-rtdb.firebaseio.com',
             projectId: 'game-referral',
             storageBucket: 'game-referral.appspot.com',
-            messagingSenderId: process.env.SENDER_ID,
-            appId: process.env.APP_ID,
-            measurementId: process.env.MEASUREMENT_ID,
+            messagingSenderId: process.env.SENDER_ID.toString(),
+            appId: process.env.APP_ID.toString(),
+            measurementId: process.env.MEASUREMENT_ID.toString(),
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
@@ -182,8 +182,8 @@ export class App {
         const referral = document.getElementById('referral').value;
 
         // check the user name with the referral code - "referral".
-        const username = process.env.USERNAME;
-        const pwd = process.env.PASSWORD;
+        const username = process.env.USERNAME.toString();
+        const pwd = process.env.PASSWORD.toString();
         firebase.auth().signInWithEmailAndPassword(username, pwd);
 
         const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
