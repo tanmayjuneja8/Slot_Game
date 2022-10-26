@@ -29,6 +29,8 @@ import '../header/header.styles.scss';
 import '../footer/footer.styles.scss';
 
 import referralCodeGenerator from 'referral-code-generator';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 
 const SERVICES = {
