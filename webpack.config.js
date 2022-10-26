@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 const path = require('path');
+const fs = require('fs');
+require('dotenv').config();
 
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,6 +11,7 @@ const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const Dotenv = require('dotenv-webpack');
 
 const pkg = require('./package.json');
 
@@ -27,15 +30,15 @@ module.exports = (env, argv) => {
             ],
         },
 
-        /*
         // TODO: Integrate with ESLint:
         // https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/1321
         resolve: {
-            alias: {
-                common: path.resolve(__dirname, 'src/common/'),
+            fallback: {
+                "fs": false,
+                "os": false,
+                "path": false
             },
         },
-        */
 
         output: {
             filename: PROD ? '[name].[contenthash].js' : '[name].[fullhash].js',
@@ -102,6 +105,8 @@ module.exports = (env, argv) => {
                 },
                 // We can use templateParameters if more options are required, but it will override all the above.
             }),
+
+            new Dotenv(),
 
             new MiniCssExtractPlugin({
                 filename: PROD ? '[name].[contenthash].css' : '[name].[fullhash].css',

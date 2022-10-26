@@ -35,9 +35,16 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.2.0",
+        "@fortawesome/free-regular-svg-icons": "^6.2.0",
+        "@fortawesome/free-solid-svg-icons": "^6.2.0",
+        "@fortawesome/react-fontawesome": "^0.2.0",
+        "@lottiefiles/lottie-player": "^1.6.0",
         "core-js": "^3.23.5",
+        "dotenv": "^16.0.3",
         "http-server": "^14.1.1",
         "php": "^1.0.2",
+        "referral-code-generator": "^1.0.8",
         "vercel": "^28.4.12"
     },
     "devDependencies": {
@@ -53,6 +60,7 @@
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.1",
         "css-minimizer-webpack-plugin": "^4.0.0",
+        "dotenv-webpack": "^8.0.1",
         "ejs": "^3.1.8",
         "ejs-compiled-loader": "^3.1.0",
         "eslint": "^8.20.0",

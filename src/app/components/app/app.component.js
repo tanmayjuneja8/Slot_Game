@@ -1,3 +1,9 @@
+/* eslint-disable radix */
+/* eslint-disable max-len */
+/* eslint-disable no-unreachable */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/newline-after-import */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 /* eslint-disable func-names */
@@ -22,6 +28,9 @@ import './app.style.scss';
 import '../header/header.styles.scss';
 import '../footer/footer.styles.scss';
 
+import referralCodeGenerator from 'referral-code-generator';
+
+
 const SERVICES = {
     sound: SMSoundService,
     vibration: SMVibrationService,
@@ -34,6 +43,7 @@ const handleOptionChange = (key, value) => {
 
     localStorage.setItem(key, value);
 };
+
 
 export class App {
 
@@ -59,14 +69,13 @@ export class App {
     // Components:
     slotMachine;
 
-    coins = 5; ct = 1; percent = 80; time = null;
+    coins = 5; ct = 1; percent = 80; time = null; value = localStorage.value = 20;
     coin_percentage = 0;
     lastSpin = localStorage.lastSpin || 0;
     isSoundDisabled = localStorage.sound === 'false';
     isVibrationDisabled = localStorage.vibration === 'false';
     isInstructionDisabled = 'false';
     isFirstTime = localStorage.firstTime !== 'false';
-
     constructor() {
         const now = Date.now();
         if (now - this.lastSpin >= App.ONE_DAY) {
@@ -77,6 +86,8 @@ export class App {
         this.handleGetPrice = this.handleGetPrice.bind(this);
 
         let focusActive = false;
+
+        document.getElementById('referralForm').addEventListener('submit', this.submitForm);
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab' && !focusActive) {
@@ -92,9 +103,153 @@ export class App {
             focusActive = false;
             document.body.classList.remove(App.C_FOCUS_ACTIVE);
         });
+        const firebaseConfig = {
+            apiKey: process.env.API_KEY || 'AIzaSyDfeNYGpnsrDHyAks9q-72HRY5OXP8tQPg',
+            authDomain: 'game-referral.firebaseapp.com',
+            databaseURL: 'https://game-referral-default-rtdb.firebaseio.com',
+            projectId: 'game-referral',
+            storageBucket: 'game-referral.appspot.com',
+            messagingSenderId: process.env.SENDER_ID,
+            appId: process.env.APP_ID,
+            measurementId: process.env.MEASUREMENT_ID,
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        const facebookBtn = document.getElementById('fb');
+        const twitterBtn = document.getElementById('twitter');
+        const linkedinBtn = document.getElementById('linkedin');
+        const whatsappBtn = document.getElementById('wa');
+        const postUrl = 'https://slotgame.vercel.app/';
+        const postTitle = encodeURI('Play this game to win cash and exciting prizes like I did on the Blozum website. Blozom Website:');
+
+        facebookBtn.setAttribute(
+            'href',
+            `https://www.facebook.com/sharer.php?u=${ postUrl }`,
+        );
+
+        twitterBtn.setAttribute(
+            'href',
+            `https://twitter.com/share?url=${ postUrl }&text=${ postTitle }`,
+        );
+
+        linkedinBtn.setAttribute(
+            'href',
+            `https://www.linkedin.com/shareArticle?url=${ postUrl }&title=${ postTitle }`,
+        );
+
+        whatsappBtn.setAttribute(
+            'href',
+            `https://wa.me/?text=${ postTitle } ${ postUrl }`,
+        );
         // Init/render conditional parts of the UI such as vibration and first-time only features:
         this.initUI();
     }
+
+    removeCommas(word) {
+        console.log(this.ct);
+        return word.replace(/,/g, '');
+    }
+
+
+    refCodeGen() {
+        const alphaNumeric = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        const picks = [];
+
+        // loop through alphabets array and pick an alphabet with the generated index
+        for (let i = 0; i < 6; i++) {
+            const key = Math.floor(Math.random() * alphaNumeric.length);
+            picks.push(alphaNumeric[key]);
+        }
+
+        // convert selected alphabets array to string and remove seperating commas
+        let letters1 = picks.toString();
+        letters1 = this.removeCommas(letters1);
+        return letters1;
+    }
+
+    CopyToClipboard(id) {
+        console.log(this.ct);
+        navigator.clipboard.writeText(id);
+    }
+
+    submitForm(e) {
+        e.preventDefault();
+
+        const firstName = document.getElementById('firstName').value;
+        const emailid = document.getElementById('emailid').value;
+        const number = document.getElementById('number').value;
+        const referral = document.getElementById('referral').value;
+
+        // check the user name with the referral code - "referral".
+        const username = process.env.USERNAME;
+        const pwd = process.env.PASSWORD;
+        firebase.auth().signInWithEmailAndPassword(username, pwd);
+
+        const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
+        const query = firebase.database().ref('Game-Referral');
+        query.once('value')
+            .then(function (snapshot) {
+                snapshot.forEach(function (childSnapshot) {
+                    const key = childSnapshot.key;
+                    const childData = childSnapshot.val();
+                    if (referral === childData.uniqueCode) {
+                        const updates = {};
+                        updates[`Game-Referral/${ key }/count`] = firebase.database.ServerValue.increment(1);
+                        updates[`Game-Referral/${ key }/firstName`] = childData.firstName;
+                        updates[`Game-Referral/${ key }/referral`] = childData.uniqueCode;
+                        query.update(updates);
+                    }
+                });
+            });
+        const contactFormDB = firebase.database().ref('Game-Referral');
+        const newContactForm = contactFormDB.push();
+        console.log(this.ct);
+        const coin2 = 1000 + parseInt(localStorage.value);
+        document.getElementById('Ref1').innerHTML = 'Your Unique Referral Code: ' + uniqueCode;
+        const facebookBtn = document.getElementById('fb');
+        const twitterBtn = document.getElementById('twitter');
+        const linkedinBtn = document.getElementById('linkedin');
+        const whatsappBtn = document.getElementById('wa');
+        const postUrl = 'https://slotgame.vercel.app/';
+        const postTitle = encodeURI('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + '  Blozom Website:');
+
+        facebookBtn.setAttribute(
+            'href',
+            `https://www.facebook.com/sharer.php?u=${ postUrl }`,
+        );
+
+        twitterBtn.setAttribute(
+            'href',
+            `https://twitter.com/share?url=${ postUrl }&text=${ postTitle }`,
+        );
+
+        linkedinBtn.setAttribute(
+            'href',
+            `https://www.linkedin.com/shareArticle?url=${ postUrl }&title=${ postTitle }`,
+        );
+
+        whatsappBtn.setAttribute(
+            'href',
+            `https://wa.me/?text=${ postTitle } ${ postUrl }`,
+        );
+
+
+        newContactForm.set({
+            firstName,
+            emailid,
+            uniqueCode,
+            number,
+            count: 0,
+            value: coin2,
+        });
+        setTimeout(function () {
+            document.getElementById('referralForm').reset();
+            document.getElementById('close').click();
+            document.getElementsByClassName('btn btn-lg btn-warning')[6].click();
+        }, 500);
+    }
+
 
     handleUseCoin() {
         if (this.coin_percentage >= 95) {
@@ -182,7 +337,6 @@ export class App {
         const now = Date.now();
         const button = document.getElementsByClassName('btn btn-lg btn-warning')[0];
         const card = document.getElementById('p1');
-        console.log(this.ct);
         if (now - this.time >= 5000) {
             this.percent = Math.random() * (5) + 83;
             if (this.ct < 50) {
@@ -193,12 +347,13 @@ export class App {
             }
         }
         if (this.ct <= 49) {
-            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + this.ct * 20 + ' BZM coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
+            localStorage.value = this.ct * 20;
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + this.ct * 20 + ' BLZ coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         } else {
-            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + 1000 + ' BZM coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
+            localStorage.value = 1000;
+            card.innerHTML = 'Wow! You did better than <b>' + this.percent.toFixed(2) + '%</b> people in the last game.<br>Your rewards: <b>' + 1000 + ' BLZ coins</b>.<br><br>Claim your rewards by joining the waitlist below!';
         }
         this.time = Date.now();
-        console.log(this.ct * 20);
         setTimeout(function () {
             button.click();
         }, 950);
