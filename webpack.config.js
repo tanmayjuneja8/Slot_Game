@@ -122,9 +122,11 @@ module.exports = (env, argv) => {
                 }],
             }),
 
-            // new webpack.DefinePlugin({
-            //     'process.env': {},
-            // }),
+            // eslint-disable-next-line no-undef
+            new webpack.DefinePlugin({
+                'process.env.USERNAME': JSON.stringify(process.env.USERNAME),
+                'process.env.PASSWORD': JSON.stringify(process.env.PASSWORD),
+            }),
 
             // Same as before, but sets properties inside `process.env` specifically:
             // new webpack.EnvironmentPlugin({
