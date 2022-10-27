@@ -181,19 +181,9 @@ export class App {
         const referral = document.getElementById('referral').value;
 
         // check the user name with the referral code - "referral".
-        console.log(process.env.USERNAME);
-        console.log(process.env.PASSWORD);
         const username = process.env.USERNAME;
         const pwd = process.env.PASSWORD;
         const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
-        firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                // User logged in already or has just logged in.
-                console.log(user.uid);
-            } else {
-                // User not logged in or has just logged out.
-            }
-        });
 
         const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
         const query = firebase.database().ref('Game-Referral');
