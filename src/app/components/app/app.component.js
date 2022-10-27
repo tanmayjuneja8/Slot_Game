@@ -27,8 +27,10 @@ import { SMVibrationService } from '../../services/slot-machine/vibration/slot-m
 import './app.style.scss';
 import '../header/header.styles.scss';
 import '../footer/footer.styles.scss';
+import * as dotenv from 'dotenv';
 
-import referralCodeGenerator from 'referral-code-generator';
+import referralCodeGenerator from 'referral-code-generator'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 
 
 const SERVICES = {
