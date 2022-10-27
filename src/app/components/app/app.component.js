@@ -182,8 +182,8 @@ export class App {
         const referral = document.getElementById('referral').value;
 
         // check the user name with the referral code - "referral".
-        const username = process.env.USERNAME.toString();
-        const pwd = process.env.PASSWORD.toString();
+        const username = process.env.USERNAME.toString;
+        const pwd = process.env.PASSWORD.toString;
         firebase.auth().signInWithEmailAndPassword(username, pwd);
 
         const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
