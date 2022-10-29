@@ -6,7 +6,7 @@ let isEnabled = true;
 export const SMVibrationService = {
 
     start() {
-        isEnabled && vibrate(VIBRATION_START);
+        // isEnabled && vibrate(VIBRATION_START);
     },
 
     stop() {
