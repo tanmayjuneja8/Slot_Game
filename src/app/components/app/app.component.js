@@ -114,6 +114,11 @@ export class App {
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
+        const username = JSON.stringify(process.env.USERNAME);
+        const pwd = JSON.stringify(process.env.PASSWORD);
+        console.log(username);
+        console.log(pwd);
+        const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
 
         const facebookBtn = document.getElementById('fb');
         const twitterBtn = document.getElementById('twitter');
@@ -181,9 +186,6 @@ export class App {
         const referral = document.getElementById('referral').value;
 
         // check the user name with the referral code - "referral".
-        const username = process.env.USERNAME;
-        const pwd = process.env.PASSWORD;
-        const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
 
         const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
         const query = firebase.database().ref('Game-Referral');
