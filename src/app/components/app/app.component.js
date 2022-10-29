@@ -114,8 +114,8 @@ export class App {
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
-        const username = JSON.stringify(process.env.USERNAME);
-        const pwd = JSON.stringify(process.env.PASSWORD);
+        const username = process.env.USERNAME;
+        const pwd = process.env.PASSWORD;
         console.log(username);
         console.log(pwd);
         const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
