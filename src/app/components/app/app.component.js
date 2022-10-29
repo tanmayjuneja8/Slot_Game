@@ -66,7 +66,7 @@ export class App {
     slotMachine;
 
     coins = 5; ct = 1; percent = 80; time = null; value = localStorage.value = 20;
-    coin_percentage = 0;
+    coin_percentage = 0; ct1 = 'Have a nice day ahead! 📣🐢';
     lastSpin = localStorage.lastSpin || 0;
     isSoundDisabled = localStorage.sound === 'false';
     isVibrationDisabled = localStorage.vibration === 'false';
@@ -146,7 +146,7 @@ export class App {
     }
 
     removeCommas(word) {
-        console.log(this.ct);
+        console.log(this.ct1);
         return word.replace(/,/g, '');
     }
 
@@ -168,7 +168,7 @@ export class App {
     }
 
     CopyToClipboard(id) {
-        console.log(this.ct);
+        console.log(this.ct1);
         navigator.clipboard.writeText(id);
     }
 
@@ -200,7 +200,7 @@ export class App {
             });
         const contactFormDB = firebase.database().ref('Game-Referral');
         const newContactForm = contactFormDB.push();
-        console.log(this.ct);
+        console.log(this.ct1);
         const coin2 = 1000 + parseInt(localStorage.value);
         document.getElementById('Ref1').innerHTML = 'Your Unique Referral Code: ' + uniqueCode;
         const facebookBtn = document.getElementById('fb');
@@ -269,7 +269,7 @@ export class App {
         }
         const price = jackpotPercentage;
         localStorage.coins = this.coins += price;
-        // console.log(this.coins);
+        console.log(this.ct1);
         localStorage.coin_percentage = this.coin_percentage = Math.round(Math.min(this.coins / 3, 100));
         // console.log(this.coin_percentage);
         // this.handlebar();
