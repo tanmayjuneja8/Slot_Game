@@ -139,10 +139,11 @@ export class SlotMachine {
         resetAnimations();
 
         SMSoundService.coin();
-        // SMVibrationService.start();
 
         this.lastUpdate = performance.now();
         requestAnimationFrame(() => this.tick());
+        setGlobalClickAndTabHandler(this.handleClick);
+        if (this.currentReel !== null) requestAnimationFrame(() => this.tick());
     }
 
     stop() {

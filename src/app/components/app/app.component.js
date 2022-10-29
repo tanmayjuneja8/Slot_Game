@@ -18,11 +18,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-use-before-define */
 import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
-// import { HAS_TOUCH } from '../../constants/browser.constants';
 import { SlotMachine } from '../slot-machine/slot-machine.component';
 import { ToggleButton } from '../toggle-button/toggle-button.component';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
-// import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
 
 import './app.style.scss';
 import '../header/header.styles.scss';
@@ -32,7 +30,6 @@ import referralCodeGenerator from 'referral-code-generator';
 
 const SERVICES = {
     sound: SMSoundService,
-    // vibration: SMVibrationService,
 };
 
 const handleOptionChange = (key, value) => {
@@ -307,7 +304,6 @@ export class App {
 
         this.initToggleButtons();
         // Init/render slot machine symbols:
-
         if (isFirstTime) {
             this.isFirstTime = localStorage.firstTime = false;
 
