@@ -116,8 +116,6 @@ export class App {
         const db = firebase.database();
         const username = process.env.USERNAME;
         const pwd = process.env.PASSWORD;
-        console.log(username);
-        console.log(pwd);
         const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
 
         const facebookBtn = document.getElementById('fb');
@@ -302,6 +300,15 @@ export class App {
         }
 
         this.initToggleButtons();
+        // Init/render slot machine symbols:
+        this.slotMachine = new SlotMachine(
+            this.mainElement,
+            this.handleUseCoin,
+            this.handleGetPrice,
+            5,
+            SYMBOLS_RANDOM,
+            isFirstTime,
+        );
 
         if (isFirstTime) {
             this.isFirstTime = localStorage.firstTime = false;
@@ -313,15 +320,6 @@ export class App {
             this.slotMachine.start();
         }
 
-        // Init/render slot machine symbols:
-        this.slotMachine = new SlotMachine(
-            this.mainElement,
-            this.handleUseCoin,
-            this.handleGetPrice,
-            5,
-            SYMBOLS_RANDOM,
-            isFirstTime,
-        );
     }
 
     initToggleButtons() {
