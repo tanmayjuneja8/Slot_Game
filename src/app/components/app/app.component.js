@@ -212,6 +212,7 @@ export class App {
         const whatsappBtn = document.getElementById('wa');
         const postUrl = 'https://slotgame.vercel.app/';
         const postTitle = encodeURI('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + '  Blozom Website:');
+        document.getElementById('ref_copy').addEventListener('copy_ref', navigator.clipboard.writeText('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + '  Blozom Website:'));
 
         facebookBtn.setAttribute(
             'href',
@@ -245,7 +246,7 @@ export class App {
         setTimeout(function () {
             document.getElementById('referralForm').reset();
             document.getElementById('close').click();
-            document.getElementsByClassName('btn btn-lg btn-warning')[6].click();
+            document.getElementsByClassName('btn btn-lg btn-warning')[7].click();
         }, 500);
     }
 

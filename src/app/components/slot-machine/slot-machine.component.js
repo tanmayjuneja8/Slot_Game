@@ -4,7 +4,7 @@
 import { SYMBOLS_CLASSIC } from '../../constants/symbols.constants';
 import { resetAnimations } from '../../utils/animation.util';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
-import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
+// import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
 import { IS_FIREFOX } from '../../constants/browser.constants';
 import { setGlobalClickAndTabHandler } from '../../utils/touch.util';
 
@@ -139,7 +139,7 @@ export class SlotMachine {
         resetAnimations();
 
         SMSoundService.coin();
-        SMVibrationService.start();
+        // SMVibrationService.start();
 
         this.lastUpdate = performance.now();
         requestAnimationFrame(() => this.tick());
@@ -239,7 +239,7 @@ export class SlotMachine {
         this.currentCombination.push(this.reels[reelIndex].stop(speed, deltaAlpha));
 
         SMSoundService.stop();
-        SMVibrationService.stop();
+        // SMVibrationService.stop();
     }
 
     checkPrize() {
