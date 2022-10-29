@@ -35,9 +35,9 @@ module.exports = (env, argv) => {
         // https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/1321
         resolve: {
             fallback: {
-                "fs": false,
-                "os": false,
-                "path": false
+                fs: false,
+                os: false,
+                path: false,
             },
         },
 

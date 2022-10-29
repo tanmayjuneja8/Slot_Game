@@ -22,7 +22,7 @@ import { HAS_TOUCH } from '../../constants/browser.constants';
 import { SlotMachine } from '../slot-machine/slot-machine.component';
 import { ToggleButton } from '../toggle-button/toggle-button.component';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
-import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
+// import { SMVibrationService } from '../../services/slot-machine/vibration/slot-machine-vibration.service';
 
 import './app.style.scss';
 import '../header/header.styles.scss';
@@ -32,7 +32,7 @@ import referralCodeGenerator from 'referral-code-generator';
 
 const SERVICES = {
     sound: SMSoundService,
-    vibration: SMVibrationService,
+    // vibration: SMVibrationService,
 };
 
 const handleOptionChange = (key, value) => {
@@ -296,12 +296,6 @@ export class App {
         // Init/render the game info at the top:
         this.refreshGameInfo();
 
-        if (!HAS_TOUCH) {
-            document.querySelector(App.S_TOGGLE_VIBRATION).parentElement.setAttribute('hidden', true);
-        }
-
-        this.initToggleButtons();
-        // Init/render slot machine symbols:
         this.slotMachine = new SlotMachine(
             this.mainElement,
             this.handleUseCoin,
@@ -310,6 +304,9 @@ export class App {
             SYMBOLS_RANDOM,
             isFirstTime,
         );
+
+        this.initToggleButtons();
+        // Init/render slot machine symbols:
 
         if (isFirstTime) {
             this.isFirstTime = localStorage.firstTime = false;
@@ -327,10 +324,6 @@ export class App {
         // eslint-disable-next-line no-new
         new ToggleButton(App.S_TOGGLE_SOUND, 'sound', !this.isSoundDisabled, handleOptionChange);
 
-        if (HAS_TOUCH) {
-            // eslint-disable-next-line no-new
-            new ToggleButton(App.S_TOGGLE_VIBRATION, 'vibration', !this.isVibrationDisabled, handleOptionChange);
-        }
     }
 
     handleNoti() {
