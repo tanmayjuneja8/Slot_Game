@@ -142,8 +142,6 @@ export class SlotMachine {
 
         this.lastUpdate = performance.now();
         requestAnimationFrame(() => this.tick());
-        if (this.currentReel !== null) requestAnimationFrame(() => this.tick());
-        setGlobalClickAndTabHandler(this.handleClick);
     }
 
     stop() {
