@@ -355,10 +355,6 @@ export class App {
 
     handlebar() {
         this.ct++;
-        // if (this.ct === 2) {
-        //     const button2 = document.getElementsByClassName('btn btn-lg btn-warning')[1];
-        //     button2.click();
-        // }
         const progressBar = document.getElementsByClassName('progress-bar bg-success')[0];
         progressBar.style.width = `${ Math.round(this.coin_percentage) }%`;
         if (this.coin_percentage >= 15) {

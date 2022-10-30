@@ -137,11 +137,14 @@ export class SlotMachine {
         this.display.classList.remove(SlotMachine.C_IS_WIN, SlotMachine.C_IS_FAIL);
         this.reels.forEach((reel) => reel.reset());
         resetAnimations();
-
+        console.log('Animations reset');
         SMSoundService.coin();
+        console.log('Sound Service set');
 
         this.lastUpdate = performance.now();
+        console.log('last Update updated.');
         requestAnimationFrame(() => this.tick());
+        console.log('Animation Frame requested.');
     }
 
     stop() {
