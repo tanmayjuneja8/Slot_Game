@@ -288,10 +288,17 @@ export class App {
         this.handlebar();
     }
 
+    initToggleButtons() {
+        // eslint-disable-next-line no-new
+        new ToggleButton(App.S_TOGGLE_SOUND, 'sound', !this.isSoundDisabled, handleOptionChange);
+
+    }
+
     initUI() {
         const { isFirstTime } = this;
         // Init/render the game info at the top:
         this.refreshGameInfo();
+        console.log('refreshed Game Info');
 
         this.slotMachine = new SlotMachine(
             this.mainElement,
@@ -301,8 +308,10 @@ export class App {
             SYMBOLS_RANDOM,
             isFirstTime,
         );
+        console.log('new Slotmachine set');
 
         this.initToggleButtons();
+        console.log('Toggle buttons initialised');
         // Init/render slot machine symbols:
         if (isFirstTime) {
             this.isFirstTime = localStorage.firstTime = false;
@@ -310,15 +319,11 @@ export class App {
             document.activeElement.blur();
 
             this.handlebar();
+            console.log('handlebar() function completed');
 
             this.slotMachine.start();
+            console.log('Slotmachine started');
         }
-
-    }
-
-    initToggleButtons() {
-        // eslint-disable-next-line no-new
-        new ToggleButton(App.S_TOGGLE_SOUND, 'sound', !this.isSoundDisabled, handleOptionChange);
 
     }
 
@@ -350,10 +355,10 @@ export class App {
 
     handlebar() {
         this.ct++;
-        if (this.ct === 2) {
-            const button2 = document.getElementsByClassName('btn btn-lg btn-warning')[1];
-            button2.click();
-        }
+        // if (this.ct === 2) {
+        //     const button2 = document.getElementsByClassName('btn btn-lg btn-warning')[1];
+        //     button2.click();
+        // }
         const progressBar = document.getElementsByClassName('progress-bar bg-success')[0];
         progressBar.style.width = `${ Math.round(this.coin_percentage) }%`;
         if (this.coin_percentage >= 15) {
