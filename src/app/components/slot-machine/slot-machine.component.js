@@ -174,14 +174,6 @@ export class SlotMachine {
         const deltaTime = now - lastUpdate;
         const deltaAlpha = deltaTime * speed;
         console.log('2');
-        if (this.currentReel === null || this.isPaused) {
-            this.isPaused = false;
-            this.currentReel++;
-            console.log(currentReel);
-            console.log(this.isPaused);
-            console.log('3');
-            return;
-        }
 
         const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
         console.log('4');
@@ -202,6 +194,14 @@ export class SlotMachine {
         console.log('9');
         requestAnimationFrame(() => this.tick());
         console.log('10');
+        // if (this.currentReel === null || this.isPaused) {
+        //     this.isPaused = false;
+        //     this.currentReel++;
+        //     console.log(currentReel);
+        //     console.log(this.isPaused);
+        //     console.log('3');
+        //     return;
+        // }
     }
 
     zoomIn() {
