@@ -174,7 +174,8 @@ export class SlotMachine {
         const deltaTime = now - lastUpdate;
         const deltaAlpha = deltaTime * speed;
         console.log('2');
-        if (currentReel === null || this.isPaused) {
+        if (currentReel === null) {
+            console.log(this.isPaused);
             console.log('3');
             return;
         }
