@@ -74,8 +74,7 @@
 
 input[type='text'],
 input[type='name'],
-input[type='email'],
-input[type='password'] {
+input[type='email'] {
     display: block;
     box-sizing: border-box;
     margin-bottom: 0;
@@ -92,8 +91,7 @@ input[type='password'] {
 
 input[type='text']:focus,
 input[type='name']:focus,
-input[type='email']:focus,
-input[type='password']:focus {
+input[type='email']:focus {
     border-bottom: 2px solid #16a085;
     color: #16a085;
     transition: 0.2s ease;

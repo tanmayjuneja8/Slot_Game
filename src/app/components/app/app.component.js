@@ -68,11 +68,12 @@ export class App {
     coins = 5; ct = 1; percent = 80; time = null; value = localStorage.value = 20;
     coin_percentage = 0; ct1 = 'Have a nice day ahead! 📣🐢';
     lastSpin = localStorage.lastSpin || 0;
-    isSoundDisabled = localStorage.sound === 'false';
+    isSoundDisabled = localStorage.sound === 'true';
     isVibrationDisabled = localStorage.vibration === 'false';
     isInstructionDisabled = 'false';
     isFirstTime = localStorage.firstTime !== 'false';
     constructor() {
+        console.log(this.ct1);
         const now = Date.now();
         if (now - this.lastSpin >= App.ONE_DAY) {
             localStorage.lastSpin = now;
@@ -271,8 +272,6 @@ export class App {
         localStorage.coins = this.coins += price;
         console.log(this.ct1);
         localStorage.coin_percentage = this.coin_percentage = Math.round(Math.min(this.coins / 3, 100));
-        // console.log(this.coin_percentage);
-        // this.handlebar();
         this.refreshGameInfo();
     }
 
@@ -290,7 +289,7 @@ export class App {
 
     initToggleButtons() {
         // eslint-disable-next-line no-new
-        new ToggleButton(App.S_TOGGLE_SOUND, 'sound', !this.isSoundDisabled, handleOptionChange);
+        new ToggleButton(App.S_TOGGLE_SOUND, 'sound', this.isSoundDisabled, handleOptionChange);
 
     }
 
@@ -298,7 +297,6 @@ export class App {
         const { isFirstTime } = this;
         // Init/render the game info at the top:
         this.refreshGameInfo();
-        console.log('refreshed Game Info');
 
         this.slotMachine = new SlotMachine(
             this.mainElement,
@@ -308,10 +306,8 @@ export class App {
             SYMBOLS_RANDOM,
             isFirstTime,
         );
-        console.log('new Slotmachine set');
 
         this.initToggleButtons();
-        console.log('Toggle buttons initialised');
         // Init/render slot machine symbols:
         if (isFirstTime) {
             this.isFirstTime = localStorage.firstTime = false;
@@ -319,12 +315,9 @@ export class App {
             document.activeElement.blur();
 
             this.handlebar();
-            console.log('handlebar() function completed');
 
             this.slotMachine.start();
-            console.log('Slotmachine started');
             this.slotMachine.resume();
-            console.log('Slotmachine resumed');
         }
 
     }
