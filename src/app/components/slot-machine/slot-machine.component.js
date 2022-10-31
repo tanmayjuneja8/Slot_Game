@@ -183,6 +183,14 @@ export class SlotMachine {
         console.log('5');
 
         this.lastUpdate = now;
+        if (this.currentReel === null || this.isPaused) {
+            this.isPaused = false;
+            this.currentReel++;
+            console.log(currentReel);
+            console.log(this.isPaused);
+            console.log('3');
+            return;
+        }
 
         for (let i = reels.length - 1; i >= currentReel; --i) {
             console.log('6');
@@ -195,14 +203,6 @@ export class SlotMachine {
         console.log('9');
         requestAnimationFrame(() => this.tick());
         console.log('10');
-        if (this.currentReel === null || this.isPaused) {
-            this.isPaused = false;
-            this.currentReel++;
-            console.log(currentReel);
-            console.log(this.isPaused);
-            console.log('3');
-            return;
-        }
     }
 
     zoomIn() {
