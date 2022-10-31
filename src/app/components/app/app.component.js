@@ -323,7 +323,7 @@ export class App {
 
             this.slotMachine.start();
             console.log('Slotmachine started');
-            this.SlotMachine.resume();
+            this.slotMachine.resume();
             console.log('Slotmachine resumed');
         }
 

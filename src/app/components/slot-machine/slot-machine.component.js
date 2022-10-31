@@ -176,6 +176,7 @@ export class SlotMachine {
         console.log('2');
         if (this.currentReel === null || this.isPaused) {
             console.log('3');
+            // this.resume();
             return;
         }
 
