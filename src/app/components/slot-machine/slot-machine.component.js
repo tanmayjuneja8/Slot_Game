@@ -195,7 +195,6 @@ export class SlotMachine {
         requestAnimationFrame(() => this.tick());
         if (this.currentReel === null || this.isPaused) {
             this.isPaused = false;
-            this.currentReel++;
             console.log(currentReel);
             console.log(this.isPaused);
             console.log('3');
