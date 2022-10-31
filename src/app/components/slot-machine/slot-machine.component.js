@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-return */
 /* eslint-disable no-const-assign */
 /* eslint-disable no-console */
 /* eslint-disable no-use-before-define */
@@ -194,7 +193,6 @@ export class SlotMachine {
         }
         console.log('9');
         requestAnimationFrame(() => this.tick());
-        console.log('10');
         if (this.currentReel === null || this.isPaused) {
             this.isPaused = false;
             this.currentReel++;
@@ -203,6 +201,7 @@ export class SlotMachine {
             console.log('3');
             return;
         }
+        console.log('10');
     }
 
     zoomIn() {
