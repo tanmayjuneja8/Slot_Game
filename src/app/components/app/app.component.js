@@ -121,7 +121,7 @@ export class App {
         const linkedinBtn = document.getElementById('linkedin');
         const whatsappBtn = document.getElementById('wa');
         const postUrl = 'https://slotgame.vercel.app/';
-        const postTitle = encodeURI('Play this game to win cash and exciting prizes like I did on the Blozum website. #Blozum Website:');
+        const postTitle = encodeURI('Play this game to win cash and exciting prizes like I did on the Blozum website. Blozum Website:');
 
         facebookBtn.setAttribute(
             'href',
@@ -209,8 +209,8 @@ export class App {
         const linkedinBtn = document.getElementById('linkedin');
         const whatsappBtn = document.getElementById('wa');
         const postUrl = 'https://slotgame.vercel.app/';
-        const postTitle = encodeURI('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + ' #Blozom Website:');
-        document.getElementById('ref_copy').addEventListener('copy_ref', navigator.clipboard.writeText('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + ' #Blozom Website:'));
+        const postTitle = encodeURI('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + ' Blozom Website:');
+        document.getElementById('ref_copy').addEventListener('copy_ref', navigator.clipboard.writeText('Play this game and use my Blozum referral code to win cash, vouchers, and exciting prizes like I did on the Blozum website. My Referral code : ' + uniqueCode + ' Blozom Website:'));
 
         facebookBtn.setAttribute(
             'href',
