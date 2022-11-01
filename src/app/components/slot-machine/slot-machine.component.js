@@ -170,35 +170,35 @@ export class SlotMachine {
     tick() {
         const { reels, speed, currentReel, lastUpdate } = this;
         const now = performance.now();
-        console.log('1');
+        // console.log('1');
         const deltaTime = now - lastUpdate;
         const deltaAlpha = deltaTime * speed;
-        console.log('2');
+        // console.log('2');
         if (this.currentReel === null || this.isPaused) {
-            console.log('3');
+            // console.log('3');
             // this.resume();
             return;
         }
 
         const blipCounter = this.blipCounter = (this.blipCounter + 1) % SlotMachine.BLIP_RATE;
-        console.log('4');
+        // console.log('4');
 
         if (blipCounter === 0) SMSoundService.blip(1 - (this.blipFading * currentReel));
-        console.log('5');
+        // console.log('5');
 
         this.lastUpdate = now;
 
         for (let i = reels.length - 1; i >= currentReel; --i) {
-            console.log('6');
+            // console.log('6');
             const reel = reels[i];
             const angle = reel.angle = (360 + (reel.angle + deltaAlpha)) % 360;
-            console.log('7');
+            // console.log('7');
             reel.style.transform = `rotate(${ angle }deg)`;
-            console.log('8');
+            // console.log('8');
         }
-        console.log('9');
+        // console.log('9');
         requestAnimationFrame(() => this.tick());
-        console.log('10');
+        // console.log('10');
     }
 
     zoomIn() {
