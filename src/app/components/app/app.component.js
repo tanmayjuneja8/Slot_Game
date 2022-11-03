@@ -21,10 +21,12 @@ import { SYMBOLS_RANDOM } from '../../constants/symbols.constants';
 import { SlotMachine } from '../slot-machine/slot-machine.component';
 import { ToggleButton } from '../toggle-button/toggle-button.component';
 import { SMSoundService } from '../../services/slot-machine/sound/slot-machine-sound.service';
+// import intlTelInput from 'intl-tel-input';
 
 import './app.style.scss';
 import '../header/header.styles.scss';
 import '../footer/footer.styles.scss';
+// import 'intl-tel-input/build/css/intlTelInput.css';
 
 import referralCodeGenerator from 'referral-code-generator';
 
@@ -95,6 +97,13 @@ export class App {
                 document.body.classList.remove(App.C_FOCUS_ACTIVE);
             }
         });
+        const phoneInputField = document.querySelector('#number');
+        const phoneInput = window.intlTelInput(phoneInputField, {
+            initialCountry: 'in',
+            preferredCountries: ['in', 'us', 'au', 'co'],
+            utilsScript:
+            'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js',
+        });
 
         document.addEventListener('mousedown', () => {
             focusActive = false;
@@ -115,7 +124,6 @@ export class App {
         const username = process.env.USERNAME;
         const pwd = process.env.PASSWORD;
         const auth = firebase.auth().signInWithEmailAndPassword(username, pwd);
-
         const facebookBtn = document.getElementById('fb');
         const twitterBtn = document.getElementById('twitter');
         const linkedinBtn = document.getElementById('linkedin');
@@ -151,6 +159,10 @@ export class App {
         return word.replace(/,/g, '');
     }
 
+    process(event) {
+        console.log(this.ct1);
+        event.preventDefault();
+    }
 
     refCodeGen() {
         const alphaNumeric = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -195,6 +207,8 @@ export class App {
                         updates[`Game-Referral/${ key }/count`] = firebase.database.ServerValue.increment(1);
                         updates[`Game-Referral/${ key }/firstName`] = childData.firstName;
                         updates[`Game-Referral/${ key }/referral`] = childData.uniqueCode;
+                        updates[`Game-Referral/${ key }/emailid`] = childData.emailid;
+                        updates[`Game-Referral/${ key }/value`] = childData.value;
                         query.update(updates);
                     }
                 });
@@ -241,6 +255,7 @@ export class App {
             count: 0,
             value: coin2,
         });
+        // ".validate": "newData.hasChildren(['firstName', 'emailid', 'uniqueCode', 'number', 'count', 'value'])",
         setTimeout(function () {
             document.getElementById('referralForm').reset();
             document.getElementById('close').click();
