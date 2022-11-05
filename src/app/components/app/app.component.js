@@ -209,13 +209,13 @@ export class App {
                         updates[`Game-Referral/${ key }/referral`] = childData.uniqueCode;
                         updates[`Game-Referral/${ key }/emailid`] = childData.emailid;
                         updates[`Game-Referral/${ key }/value`] = childData.value;
+                        updates[`Game-Referral/${ key }/number`] = childData.number;
                         query.update(updates);
                     }
                 });
             });
         const contactFormDB = firebase.database().ref('Game-Referral');
         const newContactForm = contactFormDB.push();
-        console.log(this.ct1);
         const coin2 = 1000 + parseInt(localStorage.value);
         document.getElementById('Ref1').innerHTML = 'Your Unique Referral Code: ' + uniqueCode;
         const facebookBtn = document.getElementById('fb');
