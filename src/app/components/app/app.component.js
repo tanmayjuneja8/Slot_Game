@@ -197,6 +197,7 @@ export class App {
 
         const uniqueCode = firstName.substring(0, 3).toUpperCase() + referralCodeGenerator.alphaNumeric('uppercase', 8, 4).substring(0, 6);
         const query = firebase.database().ref('Game-Referral');
+        console.log(this.ct1);
         query.once('value')
             .then(function (snapshot) {
                 snapshot.forEach(function (childSnapshot) {
