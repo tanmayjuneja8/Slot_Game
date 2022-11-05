@@ -255,7 +255,6 @@ export class App {
             count: 0,
             value: coin2,
         });
-        // ".validate": "newData.hasChildren(['firstName', 'emailid', 'uniqueCode', 'number', 'count', 'value'])",
         setTimeout(function () {
             document.getElementById('referralForm').reset();
             document.getElementById('close').click();
