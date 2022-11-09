@@ -138,7 +138,7 @@ export class App {
 
         twitterBtn.setAttribute(
             'href',
-            'https://twitter.com/intent/tweet?hashtags=blozum&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&related=tanmay_juneja8&text=Play%20this%20game%20to%20win%20cash%20and%20exciting%20prizes%20like%20I%20did%20on%20the%20Blozum%20website.%20&url=https%3A%2F%2Fblozum.com%2F&via=BlozumPay',
+            'https://twitter.com/intent/tweet?hashtags=blozum&ref_src=twsrc%5Etfw%7Ctwcamp%5Ebuttonembed%7Ctwterm%5Eshare%7Ctwgr%5E&related=tanmay_juneja8&text=Play%20this%20game%20to%20win%20cash%20and%20exciting%20prizes%20worth%20INR%201,000%20like%20I%20did%20on%20the%20Blozum%20website.%20&url=https%3A%2F%2Fblozum.com%2F&via=BlozumPay',
         );
 
         linkedinBtn.setAttribute(
