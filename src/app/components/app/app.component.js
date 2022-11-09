@@ -87,7 +87,6 @@ export class App {
         let focusActive = false;
 
         document.getElementById('referralForm').addEventListener('submit', this.submitForm);
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Tab' && !focusActive) {
                 focusActive = true;
@@ -152,6 +151,9 @@ export class App {
         );
         // Init/render conditional parts of the UI such as vibration and first-time only features:
         this.initUI();
+
+        // document.getElementById('Instru_Button').addEventListener('click', this.slotMachine.pause());
+        // document.getElementById('close').addEventListener('click', this.slotMachine.resume());
     }
 
     removeCommas(word) {
@@ -298,7 +300,7 @@ export class App {
         const padding = 5;
         this.jackpotElement.innerText = `${ this.coin_percentage }`.padStart(padding, '0');
 
-        clearTimeout(this.timeout);
+        // clearTimeout(this.timeout);
         this.handlebar();
     }
 
@@ -333,8 +335,8 @@ export class App {
 
             this.slotMachine.start();
             this.slotMachine.resume();
+            this.slotMachine.resume();
         }
-
     }
 
     handleNoti() {
