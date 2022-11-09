@@ -151,9 +151,6 @@ export class App {
         );
         // Init/render conditional parts of the UI such as vibration and first-time only features:
         this.initUI();
-
-        // document.getElementById('Instru_Button').addEventListener('click', this.slotMachine.pause());
-        // document.getElementById('close').addEventListener('click', this.slotMachine.resume());
     }
 
     removeCommas(word) {
